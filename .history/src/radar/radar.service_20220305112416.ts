@@ -14,7 +14,7 @@ export class RadarService {
         scansResult = scans as ScanI[];
 
         for (let i in protocols) {
-            switch (protocols[i]) {
+            switch (protocols[i] as string) {
                 case "closest-enemies": // Se deberá priorizar el punto más cercano en el que haya enemigos.
                     scansResult = closestEnemies(scansResult);
                     break;
