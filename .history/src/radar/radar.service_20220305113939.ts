@@ -6,7 +6,7 @@ import { ScanI } from './interfaces/scan.interface';
 @Injectable()
 export class RadarService {
     obtenerPuntoADestruir(radar: RadarI) {
-        let protocols: Array<String>;
+        let protocols;
         let coordinatesResult: CoordenadaI;
         let scansResult: ScanI[];
 

@@ -6,12 +6,12 @@ import { ScanI } from './interfaces/scan.interface';
 @Injectable()
 export class RadarService {
     obtenerPuntoADestruir(radar: RadarI) {
-        let protocols: Array<String>;
+        let protocols = radar["protocols"];
         let coordinatesResult: CoordenadaI;
         let scansResult: ScanI[];
+        let scans = radar["scan"];
 
-        protocols = radar["protocols"];
-        scansResult = radar["scan"] as ScanI[];
+        scansResult = scans as ScanI[];
 
         for (let i in protocols) {
             switch (protocols[i]) {
@@ -39,7 +39,6 @@ export class RadarService {
         }
 
         coordinatesResult = seleccionarObjetivo(scansResult);
-
         return coordinatesResult;
     }
 }
@@ -58,9 +57,7 @@ let seleccionarObjetivo = (scans: ScanI[]): CoordenadaI => {
 }
 
 function closestEnemies(scans: ScanI[]): ScanI[] { // Se deberá priorizar el punto más cercano en el que haya enemigos. 
-    let scansResult: ScanI[];
-
-    scansResult = [];
+    let scansResult: ScanI[] = [];
 
     console.log("closest-enemies");
     scansResult = scans.sort((obj1, obj2) => {

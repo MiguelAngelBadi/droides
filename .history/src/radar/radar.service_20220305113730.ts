@@ -6,12 +6,12 @@ import { ScanI } from './interfaces/scan.interface';
 @Injectable()
 export class RadarService {
     obtenerPuntoADestruir(radar: RadarI) {
-        let protocols: Array<String>;
+        let protocols = radar["protocols"];
         let coordinatesResult: CoordenadaI;
         let scansResult: ScanI[];
+        let scans = radar["scan"];
 
-        protocols = radar["protocols"];
-        scansResult = radar["scan"] as ScanI[];
+        scansResult = scans as ScanI[];
 
         for (let i in protocols) {
             switch (protocols[i]) {
@@ -39,7 +39,6 @@ export class RadarService {
         }
 
         coordinatesResult = seleccionarObjetivo(scansResult);
-
         return coordinatesResult;
     }
 }

@@ -6,12 +6,12 @@ import { ScanI } from './interfaces/scan.interface';
 @Injectable()
 export class RadarService {
     obtenerPuntoADestruir(radar: RadarI) {
-        let protocols: Array<String>;
+        let protocols = radar["protocols"];
         let coordinatesResult: CoordenadaI;
         let scansResult: ScanI[];
+        let scans = radar["scan"];
 
-        protocols = radar["protocols"];
-        scansResult = radar["scan"] as ScanI[];
+        scansResult = scans as ScanI[];
 
         for (let i in protocols) {
             switch (protocols[i]) {
@@ -39,7 +39,6 @@ export class RadarService {
         }
 
         coordinatesResult = seleccionarObjetivo(scansResult);
-
         return coordinatesResult;
     }
 }
@@ -58,9 +57,7 @@ let seleccionarObjetivo = (scans: ScanI[]): CoordenadaI => {
 }
 
 function closestEnemies(scans: ScanI[]): ScanI[] { // Se deberá priorizar el punto más cercano en el que haya enemigos. 
-    let scansResult: ScanI[];
-
-    scansResult = [];
+    let scansResult: ScanI[] = [];
 
     console.log("closest-enemies");
     scansResult = scans.sort((obj1, obj2) => {
@@ -79,9 +76,7 @@ function closestEnemies(scans: ScanI[]): ScanI[] { // Se deberá priorizar el pu
 }
 
 function furthestEnemies(scans: ScanI[]): ScanI[] { // Se deberá priorizar el punto más lejano en el que haya enemigos. 
-    let scansResult: ScanI[];
-
-    scansResult = [];
+    let scansResult: ScanI[] = [];
 
     console.log("furthest-enemies");
     scansResult = scans.sort((obj1, obj2) => {
@@ -100,11 +95,8 @@ function furthestEnemies(scans: ScanI[]): ScanI[] { // Se deberá priorizar el p
 }
 
 function assistAllies(scans: ScanI[]): any { // Deberan de priorizarse los puntos en los que exista algún aliado.
-    let scansResult: ScanI[];
-    let scansResult2: ScanI[];
-
-    scansResult = [];
-    scansResult2 = [];
+    let scansResult: ScanI[] = [];
+    let scansResult2: ScanI[] = [];
 
     console.log("assist-allies");
     for (let i in scans) {
@@ -121,9 +113,7 @@ function assistAllies(scans: ScanI[]): any { // Deberan de priorizarse los punto
 }
 
 function avoidCrossfire(scans: ScanI[]): ScanI[] { // No debe de atacarse ningún punto en el que haya algún aliado.
-    let scansResult: ScanI[];
-
-    scansResult = [];
+    let scansResult: ScanI[] = [];
 
     console.log("avoid-crossfire");
     for (let i in scans) {
@@ -136,11 +126,8 @@ function avoidCrossfire(scans: ScanI[]): ScanI[] { // No debe de atacarse ningú
 }
 
 function prioritizeMech(scans: ScanI[]): ScanI[] { // Debe de atacarse unm ech si se encuentra. En caso negativo, cualquier otro tipo deobjetivo será válido.
-    let scansResult: ScanI[];
-    let scansResult2: ScanI[];
-
-    scansResult = [];
-    scansResult2 = [];
+    let scansResult: ScanI[] = [];
+    let scansResult2: ScanI[] = [];
 
     console.log("prioritize-mech");
     for (let i in scans) {
@@ -157,9 +144,7 @@ function prioritizeMech(scans: ScanI[]): ScanI[] { // Debe de atacarse unm ech s
 }
 
 function avoidMech(scans: ScanI[]): ScanI[] { // No debe de atacarse ningún enemigo del tipom ech
-    let scansResult: ScanI[];
-
-    scansResult = [];
+    let scansResult: ScanI[] = [];
 
     console.log("avoid-mech");
     for (let i in scans) {
@@ -173,7 +158,7 @@ function avoidMech(scans: ScanI[]): ScanI[] { // No debe de atacarse ningún ene
 
 function distanciaPunto(coordinates: CoordenadaI): number {// d(a,b) = raiz (x2-x1)2 + (y2 - y1)2
     let origen: CoordenadaI;
-    let distancia: number;
+    let distancia : number;
 
     origen = { x: 0, y: 0 };
     // console.log("La distancia es: " + Math.sqrt(Math.pow((coordinates.x - 0), 2) + Math.pow((coordinates.y - 0), 2)))
